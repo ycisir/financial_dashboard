@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 9.99
+  record_type: 1
+  category: MyString
+  date: 2026-04-02
+  notes: MyText
+  user: one
+
+two:
+  amount: 9.99
+  record_type: 1
+  category: MyString
+  date: 2026-04-02
+  notes: MyText
+  user: two
