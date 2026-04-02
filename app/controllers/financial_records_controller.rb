@@ -1,5 +1,7 @@
 class FinancialRecordsController < ApplicationController
 	before_action :set_record, only: %i[update destroy]
+	before_action :require_admin, only: %i[create update destroy]
+	before_action :require_analyst_or_admin, only: %i[summary]
 
 	def index
 		@records = FinancialRecord.all

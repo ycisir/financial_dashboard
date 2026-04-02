@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	before_action :require_admin
 	before_action :set_user, only: %i[update change_status]
   
   def index
