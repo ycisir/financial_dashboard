@@ -70,3 +70,5 @@ rails test
 * Authentication
 * Pagination and search
 * API documentation
+* Rate limiting
+* Soft delete functionality
