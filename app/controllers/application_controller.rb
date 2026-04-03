@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
 		end
 	end
 
-	def require_viewer
+	def require_authenticated_user
 		unless current_user.viewer? || current_user.analyst? || current_user.admin?
 			render json: { error: "Access denied" }, status: :forbidden
 		end
