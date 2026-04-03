@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def change_status
-    @user.status = @user.status == "active" ? "inactive" : "active"
+    @user.status = @user.active? ? "inactive" : "active"
     if @user.save
       render json: { message: "User status updated successfully", status: @user.status }
     else
