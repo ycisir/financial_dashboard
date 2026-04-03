@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+	rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+
 	def current_user
 		User.first
 	end
@@ -17,5 +19,9 @@ class ApplicationController < ActionController::API
 		unless current_user.viewer? || current_user.analyst? || current_user.admin?
 			render json: { error: "Access denied" }, status: :forbidden
 		end
+	end
+
+	def record_not_found
+	  render json: { error: "Record not found" }, status: :not_found
 	end
 end
