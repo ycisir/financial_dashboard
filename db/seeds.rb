@@ -9,4 +9,25 @@
 #   end
 
 
-user = User.create(name: "Jack Sparrow", email: "jack@example.com", role: "admin", status: "active")
+user = User.create!(
+  name: "Jack Sparrow",
+  email: "jack@example.com",
+  role: :admin,
+  status: :active
+)
+
+record_types = FinancialRecord.record_types.keys
+categories = ["Food", "Transport", "Rent", "Entertainment", "Salary", "Investment"]
+
+50.times do
+  FinancialRecord.create!(
+    user: user,
+    amount: rand(50.0..5000.0).round(2),
+    record_type: record_types.sample,
+    category: categories.sample,
+    date: Faker::Date.between(from: 2.years.ago, to: Date.today),
+    notes: Faker::Lorem.sentence(word_count: 8)
+  )
+end
+
+puts "Seeded 50 financial records"
