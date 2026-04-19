@@ -8,21 +8,21 @@ class FinancialRecordsController < ApplicationController
 		@records = FinancialRecord.all
 
 		# filter by record_type
-    @records = @records.where(record_type: params[:record_type]) if params[:record_type]
+    @records = @records.by_record_type(params[:record_type])
 
     # filter by category
-    @records = @records.where(category: params[:category]) if params[:category]
+    @records = @records.by_category(params[:category])
 
     # filter by date
-    @records = @records.where(date: params[:start_date]..params[:end_date]) if params[:start_date] && params[:end_date]
+    @records = @records.where(date: params[:start_date]..params[:end_date])
 
 		render json: @records
 	end
 
 	def summary
     @records = FinancialRecord.all
-    total_income = @records.where(record_type: "income").sum(:amount)
-    total_expense = @records.where(record_type: "expense").sum(:amount)
+    total_income = @records.by_record_type("income").sum(:amount)
+    total_expense = @records.by_record_type("expense").sum(:amount)
     net_balance = total_income - total_expense
     category_totals = @records.group(:category).sum(:amount)
 
